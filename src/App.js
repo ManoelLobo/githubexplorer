@@ -4,10 +4,12 @@
  */
 
 import React from 'react';
-import { View } from 'react-native';
+import createRootNavigator from 'routes';
 
-const App = () => (
-  <View />
-);
+const App = () => {
+  const Layout = createRootNavigator();
+
+  return <Layout />;
+};
 
 export default App;

@@ -1,0 +1,33 @@
+import { StyleSheet } from 'react-native';
+import { colors, typography } from 'styles';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.lighter,
+  },
+
+  searchBar: {
+    flexDirection: 'row',
+    backgroundColor: colors.bright,
+    padding: 20,
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+
+  searchInput: {
+    flex: 1,
+    backgroundColor: colors.lighter,
+    fontSize: typography.small,
+    padding: 5,
+    borderRadius: 5,
+    alignSelf: 'stretch',
+  },
+
+  searchButton: {
+    marginLeft: 10,
+  },
+});
+
+export default styles;
