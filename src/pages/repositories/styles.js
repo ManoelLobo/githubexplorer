@@ -8,12 +8,16 @@ const styles = StyleSheet.create({
   },
 
   searchBar: {
+    backgroundColor: colors.bright,
+    marginBottom: 10,
+  },
+
+  search: {
     flexDirection: 'row',
     backgroundColor: colors.bright,
     padding: 20,
     alignSelf: 'stretch',
     alignItems: 'center',
-    marginBottom: 10,
   },
 
   searchInput: {
@@ -27,6 +31,12 @@ const styles = StyleSheet.create({
 
   searchButton: {
     marginLeft: 10,
+  },
+
+  error: {
+    backgroundColor: colors.bright,
+    paddingLeft: 20,
+    paddingBottom: 10,
   },
 });
 
