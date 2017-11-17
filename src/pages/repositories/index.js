@@ -95,7 +95,7 @@ export default class Repositories extends Component {
   renderList = () => (
     this.state.repositories.length ?
       this.renderRepositories() :
-      <Text>Adicione repositórios</Text>
+      <Text style={styles.empty}>Adicione repositórios</Text>
   );
 
   render() {

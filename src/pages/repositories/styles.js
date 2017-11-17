@@ -33,6 +33,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
+  empty: {
+    paddingLeft: 20,
+  },
+
   error: {
     backgroundColor: colors.bright,
     paddingLeft: 20,
