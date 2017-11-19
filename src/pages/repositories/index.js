@@ -44,7 +44,7 @@ export default class Repositories extends Component {
     if (!repository.ok) throw Error();
 
     const savedRepositories = await AsyncStorage.getItem('@IssueNavigator:repositories')
-      .then(response => (response ? JSON.parse(response) : []));
+      .then(response => JSON.parse(response));
 
     const repoData = repository.data;
     const ownerKey = repoData.owner.type === 'User' ? 'owner' : 'organization';
@@ -88,7 +88,7 @@ export default class Repositories extends Component {
       }
       data={this.state.repositories}
       keyExtractor={repo => repo.id}
-      renderItem={({ item }) => <Repository repository={item} />}
+      renderItem={({ item }) => <Repository repository={item} navigation={this.props.navigation} />}
     />
   );
 

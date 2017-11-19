@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
-const Issues = () => (
-  <View><Text>ISSUES</Text></View>
-);
+export default class Issues extends Component {
+  renderList = () => {}
 
-export default Issues;
+  render() {
+    const { repository } = this.props.navigation.state.params.repository;
+
+    return (
+      <View><Text>ISSUES {repository}</Text></View>
+    );
+  }
+}
