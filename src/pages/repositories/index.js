@@ -50,17 +50,21 @@ export default class Repositories extends Component {
 
     if (!repository.ok) throw Error();
 
-    const repoData = repository.data;
-    const ownerKey = repoData.owner.type === 'User' ? 'owner' : 'organization';
-    const storeRepo = {
-      id: repoData.id,
-      name: repoData.name,
-      fullName: repoData.full_name,
-      organization: repoData[ownerKey].login,
-      avatar: repoData[ownerKey].avatar_url,
+    const { data } = repository;
+    const { repositories } = this.state;
+
+    if (repositories.some(repo => repo.id === data.id)) return;
+
+    const ownerKey = data.owner.type === 'User' ? 'owner' : 'organization';
+    const newRepo = {
+      id: data.id,
+      name: data.name,
+      fullName: data.full_name,
+      organization: data[ownerKey].login,
+      avatar: data[ownerKey].avatar_url,
     };
 
-    await AsyncStorage.setItem('@IssueNavigator:repositories', JSON.stringify([storeRepo, ...this.state.repositories]));
+    await AsyncStorage.setItem('@IssueNavigator:repositories', JSON.stringify([newRepo, ...repositories]));
   }
 
   addRepository = () => {
