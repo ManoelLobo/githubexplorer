@@ -95,13 +95,13 @@ export default class Repositories extends Component {
       keyExtractor={repo => repo.id}
       renderItem={({ item }) => <Repository repository={item} navigation={this.props.navigation} />}
     />
-  );
+  )
 
   renderList = () => (
     this.state.repositories.length ?
       this.renderRepositories() :
       <Text style={styles.empty}>Adicione repositórios</Text>
-  );
+  )
 
   render() {
     return (

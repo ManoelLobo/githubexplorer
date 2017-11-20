@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, typography } from 'styles';
+import { colors } from 'styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +15,10 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
     borderRadius: 5,
+  },
+
+  empty: {
+    paddingLeft: 20,
   },
 });
 
