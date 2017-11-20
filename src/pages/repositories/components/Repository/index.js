@@ -33,7 +33,7 @@ export default class Repository extends Component {
   render() {
     const { repository } = this.props;
     return (
-      <TouchableWithoutFeedback onPress={() => { this.navigateToIssues(repository.name); }}>
+      <TouchableWithoutFeedback onPress={() => { this.navigateToIssues(repository); }}>
         <View style={styles.container}>
           <Image
             style={styles.avatar}
