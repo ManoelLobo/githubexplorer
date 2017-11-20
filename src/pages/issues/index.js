@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import {
+  FlatList,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import PropTypes from 'prop-types';
+import api from 'services/api';
 import Header from './components/Header';
+import Issue from './components/Issue';
 import styles from './styles';
 
 export default class Issues extends Component {
@@ -19,7 +27,27 @@ export default class Issues extends Component {
     header: null,
   }
 
-  renderList = () => {}
+  state = {
+    issues: [],
+    loading: false,
+    refreshing: false,
+  }
+
+  componentWillMount() {
+    this.setState({ loading: true });
+
+    this.loadIssues(this.props.navigation.state.params.repository.fullName)
+      .then(() => { this.setState({ loading: true }); });
+  }
+
+  loadIssues = async (repository) => {
+    await api.get(`/repos/${repository}/issues`)
+      .then((issues) => { this.setState({ issues }); });
+  }
+
+  renderList = () => {
+
+  }
 
   render() {
     const { name } = this.props.navigation.state.params.repository;
@@ -37,7 +65,14 @@ export default class Issues extends Component {
             <Text>Fechadas</Text>
           </TouchableOpacity>
         </View>
-        <Text>ISSUES {name}</Text>
+        <ScrollView>
+          <Issue />
+          <Issue />
+          <Issue />
+          <Issue />
+          <Issue />
+          <Issue />
+        </ScrollView>
       </View>
     );
   }
