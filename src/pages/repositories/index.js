@@ -11,6 +11,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 import { colors, typography } from 'styles';
 import api from 'services/api';
 
@@ -18,6 +19,12 @@ import Repository from './components/Repository';
 import styles from './styles';
 
 export default class Repositories extends Component {
+  static propTypes = {
+    navigation: PropTypes.shape({
+      dispatch: PropTypes.func,
+    }).isRequired,
+  }
+
   static navigationOptions = {
     header: null,
   }
@@ -38,24 +45,22 @@ export default class Repositories extends Component {
     });
   }
 
-  checkAndSaveRepository = async () => {
-    const repository = await api.get(`/repos/${this.state.search}`);
+  checkAndSaveRepository = async (searchParam) => {
+    const repository = await api.get(`/repos/${searchParam}`);
 
     if (!repository.ok) throw Error();
-
-    const savedRepositories = await AsyncStorage.getItem('@IssueNavigator:repositories')
-      .then(response => JSON.parse(response));
 
     const repoData = repository.data;
     const ownerKey = repoData.owner.type === 'User' ? 'owner' : 'organization';
     const storeRepo = {
       id: repoData.id,
-      name: repoData.full_name,
+      name: repoData.name,
+      fullName: repoData.full_name,
       organization: repoData[ownerKey].login,
       avatar: repoData[ownerKey].avatar_url,
     };
 
-    await AsyncStorage.setItem('@IssueNavigator:repositories', JSON.stringify([storeRepo, ...savedRepositories]));
+    await AsyncStorage.setItem('@IssueNavigator:repositories', JSON.stringify([storeRepo, ...this.state.repositories]));
   }
 
   addRepository = () => {
